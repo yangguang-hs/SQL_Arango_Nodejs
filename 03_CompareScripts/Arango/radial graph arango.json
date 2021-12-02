@@ -1,0 +1,16 @@
+for en in Entity
+    filter en._key == '02CB4288-EA24-4D7F-8532-6A06566E28F0'
+    for v, e, p in 1..9 any en Relationship
+        filter v!=null
+        sort length(p.edges)
+        return {
+                    related_name: v.active_name, 
+                    related_id: v._key, 
+                    source_name: en.active_name, 
+                    source_id: en._key, 
+                    distance: length(p.edges),
+                    nodes:p.vertices[*].active_name,
+                    //edges:(for edge in p.edges return {from:edge._from, to:edge._to, name: edge._id}),
+                    //currentNode:v
+                }
+
